@@ -242,27 +242,27 @@ var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oc
 var sentcount = 0;
 var count = 0 ; 
 
-wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
-                    console.log("Response success is "+success);
-                    success.forEach( function (rec)
-                    {
-                        count++;
+// wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
+//                     console.log("Response success is "+success);
+//                     success.forEach( function (rec)
+//                     {
+//                         count++;
 
 
-                            if(rec.notify_id!=null && rec.notify_id!="")
-                            {
-                                sentcount ++;
-                                NotificationTask("World Cup 2015 Calendar Sync", "Next:KEN vs RSA", "Next Match ", "KEN", "RSA", "Sydney", "at 17:00", rec.notify_id); // Added navigatedto parameter to                            
-                            }
+//                             if(rec.notify_id!=null && rec.notify_id!="")
+//                             {
+//                                 sentcount ++;
+//                                 NotificationTask("World Cup 2015 Calendar Sync", "Next:KEN vs RSA", "Next Match ", "KEN", "RSA", "Sydney", "at 17:00", rec.notify_id); // Added navigatedto parameter to                            
+//                             }
 
-                            if(success.length == count )
-                            {
-                                    console.log("sent!!! ");
-                                    //res.send(200, "Sent to "+sentcount+"  users! "); // At the end it will respond with number of users the feed has been reached. 
-                            } 
+//                             if(success.length == count )
+//                             {
+//                                     console.log("sent!!! ");
+//                                     //res.send(200, "Sent to "+sentcount+"  users! "); // At the end it will respond with number of users the feed has been reached. 
+//                             } 
 
-                    });
-                    });    
+//                     });
+//                     });    
 
 
 
@@ -294,27 +294,27 @@ function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetai
     console.log("Team A is "+TeamA);
     console.log("Team B is "+TeamB);
 
-   // wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
-   //                  console.log("Response success is "+success);
-   //                  success.forEach( function (rec)
-   //                  {
-   //                      count++;
+   wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
+                    console.log("Response success is "+success);
+                    success.forEach( function (rec)
+                    {
+                        count++;
 
 
-   //                          if(rec.notify_id!=null && rec.notify_id!="")
-   //                          {
-   //                              sentcount ++;
-   //                              NotificationTask("World Cup 2015 Calendar Sync", "Next: "+TeamA+ " vs "+TeamB, header, TeamA, TeamB, firstdetail, teamadetail1, rec.notify_id); // Added navigatedto parameter to                            
-   //                          }
+                            if(rec.notify_id!=null && rec.notify_id!="")
+                            {
+                                sentcount ++;
+                                NotificationTask("World Cup 2015 Calendar Sync", "Next: "+TeamA+ " vs "+TeamB, header, TeamA, TeamB, firstdetail, teamadetail1, rec.notify_id); // Added navigatedto parameter to                            
+                            }
 
-   //                          if(success.length == count )
-   //                          {
-   //                                  console.log("sent!!! ");
-   //                                  //res.send(200, "Sent to "+sentcount+"  users! "); // At the end it will respond with number of users the feed has been reached. 
-   //                          } 
+                            if(success.length == count )
+                            {
+                                    console.log("sent!!! ");
+                                    //res.send(200, "Sent to "+sentcount+"  users! "); // At the end it will respond with number of users the feed has been reached. 
+                            } 
 
-   //                  });
-   //                  });    
+                    });
+                    });    
 
 }
 
