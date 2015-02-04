@@ -279,7 +279,7 @@ function NotificationTask(title, msg, header, teama, teamb, firstdetail, teamade
                 var mpns = require('mpns');
                 var pushUri = notify_id;
                 console.log("The pushUri is "+pushUri);
-                var windows_navigation_path = "/LiveUpdate.xaml?Header="+header+"&Flag1Label="+teama+"&Flag2Label="+teamb+"&FirstDetail="+firstdetail+"&TeamADetail1="+teamadetail1+"&Ad=true;
+                var windows_navigation_path = "/LiveUpdate.xaml?Header="+header+"&Flag1Label="+teama+"&Flag2Label="+teamb+"&FirstDetail="+firstdetail+"&TeamADetail1="+teamadetail1+"&Ad=true";
                 mpns.sendToast(pushUri, title, msg, "",windows_navigation_path, function back(err,data)
                 {
                     console.log(data);
