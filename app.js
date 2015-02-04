@@ -305,7 +305,7 @@ function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetai
                         count++;
 
 
-                            if(rec.notify_id!=null && rec.notify_id!="")
+                            if(rec.notify_id!=null && rec.notify_id!="" && rec.preference == "send")
                             {
                                 sentcount ++;
                                 NotificationTask("World Cup 2015 Calendar Sync", "Next: "+TeamA+ " vs "+TeamB, header, TeamA, TeamB, firstdetail, teamadetail1, rec.notify_id); // Added navigatedto parameter to                            
