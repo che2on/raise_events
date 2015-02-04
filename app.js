@@ -269,6 +269,10 @@ var count = 0 ;
 
 function NotificationTask(title, msg, header, teama, teamb, firstdetail, teamadetail1, notify_id)  // Added navigateto parameter!
 {
+
+
+              // Added navigatedto parameter to                            
+
       if(notify_id.startsWith("http://")) 
      {
                 console.log("startsWith is working ");          
@@ -276,7 +280,7 @@ function NotificationTask(title, msg, header, teama, teamb, firstdetail, teamade
                 var pushUri = notify_id;
                 console.log("The pushUri is "+pushUri);
                 var windows_navigation_path = "/LiveUpdate.xaml?Header="+header+"&Flag1Label="+teama+"&Flag2Label="+teamb+"&FirstDetail="+firstdetail+"&TeamADetail1="+teamadetail1;
-                mpns.sendToast(pushUri, title, msg, windows_navigation_path, function back(err,data)
+                mpns.sendToast(pushUri, title, msg, "",windows_navigation_path, function back(err,data)
                 {
                     console.log(data);
                 });
