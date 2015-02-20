@@ -269,11 +269,8 @@ var count = 0 ;
 
 function NotificationTask(title, msg, header, teama, teamb, firstdetail, teamadetail1, notify_id)  // Added navigateto parameter!
 {
-
-
               // Added navigatedto parameter to                            
-
-      if(notify_id.startsWith("http://")) 
+    if(notify_id.startsWith("http://")) 
      {
                 console.log("startsWith is working ");          
                 var mpns = require('mpns');
@@ -292,13 +289,11 @@ function NotificationTask(title, msg, header, teama, teamb, firstdetail, teamade
 
 function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetail1)
 {
-
     var count = 0;
     var sentcount = 0;
     console.log("Team A is "+TeamA);
     console.log("Team B is "+TeamB);
-
-   wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
+    wc_users.find().sort( { modifiedOn : -1}, function(err, success) {
                     console.log("Response success is "+success);
                     success.forEach( function (rec)
                     {
@@ -308,7 +303,7 @@ function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetai
                             if(rec.notify_id!=null && rec.notify_id!="" && rec.preference == "send")
                             {
                                 sentcount ++;
-                                NotificationTask("World Cup 2015 Calendar Sync", "Next: "+TeamA+ " vs "+TeamB, header, TeamA, TeamB, firstdetail, teamadetail1, rec.notify_id); // Added navigatedto parameter to                            
+                                NotificationTask("WC 2015", "Next: "+TeamA+ " vs "+TeamB, header, TeamA, TeamB, firstdetail, teamadetail1, rec.notify_id); // Added navigatedto parameter to                            
                             }
 
                             if(success.length == count )
@@ -324,52 +319,62 @@ function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetai
 
 
  
-    ical.fromURL('http://gaadikey.com/wct7.ics', {}, function(err, data) {
+    ical.fromURL('http://gaadikey.com/wc.ics', {}, function(err, data) {
     var count = 0;
     var sentcount = 0;
       for (var k in data){
         if (data.hasOwnProperty(k)) {
           count++;
           var ev = data[k];
-          console.log("Conference",
+          console.log("The match",
             ev.summary,
             'is in',
             ev.location,
             'on the', ev.start.getDate(), ev.start.getYear(), ev.start.getMonth(), ev.start.getHours(), ev.start.getMinutes(), ev.start.getSeconds(), 'of', months[ev.start.getMonth()]);
 
-            
-            
+             
             var TeamA = getTeamAShortName(ev.summary);
             var TeamB = getTeamBShortName(ev.summary);
             var firstdetail = ev.location;
             var tpart1 = ev.start.getHours();
             var tpart2  =ev.start.getMinutes();
             var date = ev.start;
-            if(ev.start.getMinutes() == 0 )
-            tpart2 = "00";
-            var teamadetail1 = tpart1+":"+tpart2+" GMT";
+          
+            var minutesString =  ev.start.getMinutes();
+            if(minutesString.length == 1)
+            tpart2 = "0"+minutesString;
+
+            var teamadetail1 = tpart1+":"+tpart2+" GMT"; // Time of the match
             var header = ev.summary;
             console.log("Team A is "+TeamA);
             console.log("Team B is "+TeamB);
             console.log("Location is "+firstdetail);
             console.log("Time is "+teamadetail1);
-            eval("var j11 = schedule.scheduleJob(date, function(){ console.log('The Scheduled Task '); triggerNotificationForAll('"+TeamA+"', '"+TeamB+"', '"+header+"', '"+firstdetail+"', '"+teamadetail1+"'); })");
+
+            /* Trigger the event only if the event has not occured */ 
+
+              if(ev.start < q)
+              {
+                console.log("The event is already over");
+              }
+               
+              else
+              {   
+                  eval("var j11 = schedule.scheduleJob(date, function(){ console.log('The Scheduled Task '); triggerNotificationForAll('"+TeamA+"', '"+TeamB+"', '"+header+"', '"+firstdetail+"', '"+teamadetail1+"'); })");
+               //  eval("var j1 = schedule.scheduleJob(date, function(){ console.log('The 2 ')})");
+              }
+
            // triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetail1); // Schedule this beautiful function ! 
-            
-            
-           
+                   
 
         // if(ev.start < q)
         // {
         //   console.log("The event is already over");
         // }
-
         //  else
          // {
-           
+       
          //  //  eval("var j1 = schedule.scheduleJob(date, function(){ console.log('The 2 ')})");
-
-
          // }
 
  
