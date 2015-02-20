@@ -238,7 +238,6 @@ function getTeamBShortName (s)
 
 
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 var sentcount = 0;
 var count = 0 ; 
 
@@ -351,9 +350,11 @@ function triggerNotificationForAll(TeamA, TeamB, header, firstdetail, teamadetai
             console.log("Location is "+firstdetail);
             console.log("Time is "+teamadetail1);
 
-            /* Trigger the event only if the event has not occured */ 
+            /* Trigger the event only if the event has not occured */
 
-              if(ev.start < q)
+            var q =  new Date();
+
+              if(ev.start < q )
               {
                 console.log("The event is already over");
               }
